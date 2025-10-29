@@ -1,18 +1,28 @@
 import React, { useState, useRef } from 'react';
-import { BookOpen, Volume2, Copy, CheckCircle, ExternalLink, FileText, AlignLeft } from 'lucide-react';
+import { BookOpen, Volume2, Copy, CheckCircle, ExternalLink, FileText, AlignLeft, Book } from 'lucide-react';
 import theme from '../styles/theme';
 import OSIMatchingGame from './games/OSIMatchingGame';
 
 const LessonView = ({ module }) => {
   const [copied, setCopied] = useState(false);
   const [autoSelected, setAutoSelected] = useState(false);
-  const [contentMode, setContentMode] = useState('full'); // 'full' or 'summary'
+  const [contentMode, setContentMode] = useState('full'); // 'full', 'summary', or 'textbook'
   const contentRef = useRef(null);
 
   // Determine which content to show
-  const currentContent = contentMode === 'summary' && module.lesson_summary 
-    ? module.lesson_summary 
-    : module.lesson_content;
+  const getCurrentContent = () => {
+    switch(contentMode) {
+      case 'summary':
+        return module.lesson_summary || module.lesson_content;
+      case 'textbook':
+        return module.lesson_textbook || module.lesson_content;
+      case 'full':
+      default:
+        return module.lesson_content;
+    }
+  };
+
+  const currentContent = getCurrentContent();
 
   const handleCopyForNaturalReader = () => {
     navigator.clipboard.writeText(currentContent);
@@ -41,11 +51,6 @@ const LessonView = ({ module }) => {
     switch(module.gameType) {
       case 'osi-matching':
         return <OSIMatchingGame />;
-      // Add more game types as we create them
-      // case 'binary-converter':
-      //   return <BinaryConverterGame />;
-      // case 'port-matching':
-      //   return <PortMatchingGame />;
       default:
         return null;
     }
@@ -177,7 +182,9 @@ const LessonView = ({ module }) => {
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginBottom: theme.spacing.md
+        marginBottom: theme.spacing.md,
+        flexWrap: 'wrap',
+        gap: '1rem'
       }}>
         <h3 style={{ 
           color: theme.colors.darkNavy, 
@@ -187,24 +194,46 @@ const LessonView = ({ module }) => {
           Learning Objectives
         </h3>
 
-        {module.lesson_summary && (
-          <div style={{
-            display: 'flex',
-            gap: '0.5rem',
-            background: theme.colors.white,
-            padding: '0.25rem',
-            borderRadius: theme.borderRadius.sm,
-            border: `1px solid ${theme.colors.lightBlue}`
-          }}>
+        <div style={{
+          display: 'flex',
+          gap: '0.5rem',
+          background: theme.colors.white,
+          padding: '0.25rem',
+          borderRadius: theme.borderRadius.sm,
+          border: `1px solid ${theme.colors.lightBlue}`
+        }}>
+          <button
+            onClick={() => setContentMode('full')}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              padding: `${theme.spacing.xs} ${theme.spacing.sm}`,
+              background: contentMode === 'full' ? theme.colors.mediumBlue : 'transparent',
+              color: contentMode === 'full' ? theme.colors.white : theme.colors.darkNavy,
+              border: 'none',
+              borderRadius: theme.borderRadius.sm,
+              fontSize: theme.fonts.sizes.xs,
+              fontWeight: '600',
+              cursor: 'pointer',
+              fontFamily: theme.fonts.body,
+              transition: 'all 0.2s'
+            }}
+          >
+            <AlignLeft size={14} />
+            Full
+          </button>
+
+          {module.lesson_textbook && (
             <button
-              onClick={() => setContentMode('full')}
+              onClick={() => setContentMode('textbook')}
               style={{
                 display: 'flex',
                 alignItems: 'center',
                 gap: '0.5rem',
                 padding: `${theme.spacing.xs} ${theme.spacing.sm}`,
-                background: contentMode === 'full' ? theme.colors.mediumBlue : 'transparent',
-                color: contentMode === 'full' ? theme.colors.white : theme.colors.darkNavy,
+                background: contentMode === 'textbook' ? theme.colors.mediumBlue : 'transparent',
+                color: contentMode === 'textbook' ? theme.colors.white : theme.colors.darkNavy,
                 border: 'none',
                 borderRadius: theme.borderRadius.sm,
                 fontSize: theme.fonts.sizes.xs,
@@ -214,9 +243,12 @@ const LessonView = ({ module }) => {
                 transition: 'all 0.2s'
               }}
             >
-              <AlignLeft size={14} />
-              Full
+              <Book size={14} />
+              Textbook
             </button>
+          )}
+
+          {module.lesson_summary && (
             <button
               onClick={() => setContentMode('summary')}
               style={{
@@ -238,8 +270,8 @@ const LessonView = ({ module }) => {
               <FileText size={14} />
               Summary
             </button>
-          </div>
-        )}
+          )}
+        </div>
       </div>
       
       {/* Lesson Content */}
@@ -248,8 +280,8 @@ const LessonView = ({ module }) => {
         id="lesson-content"
         style={{ 
           color: theme.colors.black, 
-          lineHeight: '1.8',
-          fontSize: theme.fonts.sizes.md,
+          lineHeight: contentMode === 'textbook' ? '1.9' : '1.8',
+          fontSize: contentMode === 'textbook' ? theme.fonts.sizes.md : theme.fonts.sizes.md,
           marginBottom: theme.spacing.lg,
           whiteSpace: 'pre-wrap',
           userSelect: 'text',
@@ -259,7 +291,8 @@ const LessonView = ({ module }) => {
           border: `2px solid ${theme.colors.lightBlue}`,
           cursor: 'text',
           maxHeight: '600px',
-          overflowY: 'auto'
+          overflowY: 'auto',
+          fontFamily: contentMode === 'textbook' ? 'Georgia, "Times New Roman", serif' : theme.fonts.body
         }}
         dangerouslySetInnerHTML={{
           __html: currentContent
