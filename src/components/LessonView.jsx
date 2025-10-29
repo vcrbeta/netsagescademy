@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { BookOpen, Volume2, Copy, CheckCircle, ExternalLink, FileText, AlignLeft, Book } from 'lucide-react';
 import theme from '../styles/theme';
 import OSIMatchingGame from './games/OSIMatchingGame';
+import PortMatchingGame from './games/Portmatchinggame';
 
 const LessonView = ({ module }) => {
   const [copied, setCopied] = useState(false);
@@ -51,6 +52,8 @@ const LessonView = ({ module }) => {
     switch(module.gameType) {
       case 'osi-matching':
         return <OSIMatchingGame />;
+      case 'port-matching':
+        return <PortMatchingGame />;
       default:
         return null;
     }
