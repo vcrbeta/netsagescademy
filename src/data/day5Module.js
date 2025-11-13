@@ -152,13 +152,12 @@ Let's trace a device getting an IP address:
 **Step 1: DISCOVER (Broadcast)**
 
 Client boots up with no IP address:
-```
-Source IP:      0.0.0.0
-Destination IP: 255.255.255.255 (broadcast)
-Source MAC:     Client's MAC address
-Dest MAC:       FF:FF:FF:FF:FF:FF (broadcast)
-Message:        "I need an IP address! Anyone listening?"
-```
+
+  Source IP:      0.0.0.0
+  Destination IP: 255.255.255.255 (broadcast)
+  Source MAC:     Client's MAC address
+  Dest MAC:       FF:FF:FF:FF:FF:FF (broadcast)
+  Message:        "I need an IP address! Anyone listening?"
 
 The client broadcasts because it doesn't know:
 - Its own IP (doesn't have one yet!)
@@ -168,29 +167,27 @@ The client broadcasts because it doesn't know:
 **Step 2: OFFER (Unicast or Broadcast)**
 
 DHCP server receives DISCOVER and responds:
-```
-Source IP:      DHCP Server IP
-Destination IP: Offered IP or 255.255.255.255
-Destination MAC: Client's MAC
-Message:        "How about 192.168.1.100?"
-Includes:
-  - Offered IP address
-  - Subnet mask
-  - Lease duration
-  - Server identifier
-  - Gateway, DNS, etc.
-```
+
+  Source IP:      DHCP Server IP
+  Destination IP: Offered IP or 255.255.255.255
+  Destination MAC: Client's MAC
+  Message:        "How about 192.168.1.100?"
+  Includes:
+    - Offered IP address
+    - Subnet mask
+    - Lease duration
+    - Server identifier
+    - Gateway, DNS, etc.
 
 If multiple DHCP servers exist, client may receive multiple offers!
 
 **Step 3: REQUEST (Broadcast)**
 
 Client accepts one offer (usually first received):
-```
-Source IP:      0.0.0.0 (still no IP!)
-Destination IP: 255.255.255.255 (broadcast)
-Message:        "I choose server X's offer of 192.168.1.100"
-```
+
+  Source IP:      0.0.0.0 (still no IP!)
+  Destination IP: 255.255.255.255 (broadcast)
+  Message:        "I choose server X's offer of 192.168.1.100"
 
 Why broadcast?
 - To inform ALL DHCP servers which offer was accepted
@@ -199,11 +196,10 @@ Why broadcast?
 **Step 4: ACKNOWLEDGE (Unicast or Broadcast)**
 
 Selected DHCP server confirms:
-```
-Source IP:      DHCP Server IP
-Destination IP: Assigned IP
-Message:        "192.168.1.100 is yours! Lease details attached."
-```
+
+  Source IP:      DHCP Server IP
+  Destination IP: Assigned IP
+  Message:        "192.168.1.100 is yours! Lease details attached."
 
 Client now configures itself with:
 - IP address: 192.168.1.100
@@ -251,10 +247,9 @@ At 8 hours:
 **Manual Release:**
 
 Client can release IP early:
-```
-Windows: ipconfig /release
-Linux:   dhclient -r
-```
+
+  Windows: ipconfig /release
+  Linux:   dhclient -r
 
 Sends DHCP RELEASE message to server:
 - IP returned to pool immediately
@@ -270,35 +265,31 @@ A scope is a range of IP addresses that a DHCP server can assign, plus all confi
 **Scope Components:**
 
 **1. IP Address Range:**
-```
-Start IP: 192.168.1.100
-End IP:   192.168.1.200
-Total:    101 addresses
-```
+
+  Start IP: 192.168.1.100
+  End IP:   192.168.1.200
+  Total:    101 addresses
 
 **2. Subnet Mask:**
-```
-Subnet Mask: 255.255.255.0
-CIDR:        /24
-```
+
+  Subnet Mask: 255.255.255.0
+  CIDR:        /24
 
 **3. Exclusions:**
 
 IPs NOT to assign (reserved for static):
-```
-192.168.1.1   - Router
-192.168.1.10  - Server
-192.168.1.20  - Printer
-```
+
+  192.168.1.1   - Router
+  192.168.1.10  - Server
+  192.168.1.20  - Printer
 
 Exclusions remove these from the pool.
 
 **4. Reservations (Static Leases):**
 
 Specific MAC gets specific IP:
-```
-MAC: 00:11:22:33:44:55 → IP: 192.168.1.150
-```
+
+  MAC: 00:11:22:33:44:55 → IP: 192.168.1.150
 
 Benefits:
 - Consistent IP for device
@@ -326,43 +317,42 @@ How long client can use IP:
   - Useful for printers
 
 **6. Default Gateway (Option 3):**
-```
-Router IP: 192.168.1.1
-```
+
+  Router IP: 192.168.1.1
+
 Must be on same subnet!
 
 **7. DNS Servers (Option 6):**
-```
-Primary DNS:   8.8.8.8
-Secondary DNS: 8.8.4.4
-Tertiary DNS:  1.1.1.1
-```
+
+  Primary DNS:   8.8.8.8
+  Secondary DNS: 8.8.4.4
+  Tertiary DNS:  1.1.1.1
 
 Multiple for redundancy.
 
 **8. WINS Servers (Option 44):**
-```
-WINS Server: 192.168.1.50
-```
+
+  WINS Server: 192.168.1.50
+
 For legacy Windows NetBIOS name resolution.
 Rarely used today.
 
 **9. Domain Name (Option 15):**
-```
-Domain: company.local
-```
+
+  Domain: company.local
+
 Appended to hostnames for FQDN.
 
 **10. NTP Server (Option 42):**
-```
-Time Server: 192.168.1.5
-```
+
+  Time Server: 192.168.1.5
+
 For clock synchronization.
 
 **11. TFTP Server (Option 66):**
-```
-TFTP Server: 192.168.1.60
-```
+
+  TFTP Server: 192.168.1.60
+
 For network booting (PXE).
 
 **📊 DHCP Server Types**
@@ -393,10 +383,9 @@ DHCP uses broadcasts, which don't cross routers.
 
 **The Solution:**
 Configure router to relay DHCP:
-```
-interface GigabitEthernet0/1
- ip helper-address 192.168.10.5
-```
+
+  interface GigabitEthernet0/1
+   ip helper-address 192.168.10.5
 
 **How it works:**
 1. Client broadcasts DISCOVER
@@ -429,28 +418,26 @@ interface GigabitEthernet0/1
 6. IP helper not configured (different subnet)
 
 **Troubleshooting Steps:**
-```
-1. Check cable connection - lights on NIC?
-2. Check if DHCP server is running
-3. Ping DHCP server (if on same subnet)
-4. Check DHCP scope has available IPs
-5. Check switch port VLAN assignment
-6. Verify IP helper configuration (if different subnet)
-7. Check DHCP server logs
-```
+
+  1. Check cable connection - lights on NIC?
+  2. Check if DHCP server is running
+  3. Ping DHCP server (if on same subnet)
+  4. Check DHCP scope has available IPs
+  5. Check switch port VLAN assignment
+  6. Verify IP helper configuration (if different subnet)
+  7. Check DHCP server logs
 
 **Commands:**
-```
-Windows:
-  ipconfig /all           - Check current config
-  ipconfig /release       - Release current IP
-  ipconfig /renew        - Request new IP
-  
-Linux:
-  ip addr                 - Check current config
-  sudo dhclient -r       - Release current IP
-  sudo dhclient          - Request new IP
-```
+
+  Windows:
+    ipconfig /all           - Check current config
+    ipconfig /release       - Release current IP
+    ipconfig /renew         - Request new IP
+    
+  Linux:
+    ip addr                 - Check current config
+    sudo dhclient -r        - Release current IP
+    sudo dhclient           - Request new IP
 
 **Problem 2: Wrong IP Subnet**
 
@@ -570,11 +557,10 @@ Attacker pretends to be DHCP server:
 **VoIP Phones:**
 
 VoIP phones need special DHCP options:
-```
-Option 150: TFTP server (for configs)
-Option 66:  Boot server
-Option 43:  Vendor-specific info
-```
+
+  Option 150: TFTP server (for configs)
+  Option 66:  Boot server
+  Option 43:  Vendor-specific info
 
 Separate VLAN for voice traffic:
 - Voice VLAN (VVLAN)
@@ -585,10 +571,9 @@ Separate VLAN for voice traffic:
 **PXE Boot (Network Booting):**
 
 Computers boot from network:
-```
-Option 66: Boot server name
-Option 67: Boot file name
-```
+
+  Option 66: Boot server name
+  Option 67: Boot file name
 
 Used for:
 - Diskless workstations
@@ -721,20 +706,20 @@ You're now a DHCP master! 🎓`,
 This section is reserved for formal academic textbook content covering Dynamic vs Static IP Configuration and DHCP.
 
 **Topics to be covered:**
-• Static IP Address Configuration Methodology
-• Dynamic Host Configuration Protocol (DHCP) Architecture
-• DHCP Message Format and Packet Structure
-• DORA Process (Discover, Offer, Request, Acknowledge)
-• DHCP Lease Lifecycle Management
-• DHCP Scope Design and Configuration
-• DHCP Options and Parameters (RFC 2132)
-• DHCP Relay Agents and IP Helper Addresses
-• DHCP Failover and High Availability
-• DHCPv6 for IPv6 Networks
-• DHCP Security Considerations
-• Troubleshooting DHCP Issues
-• APIPA (Automatic Private IP Addressing)
-• Best Practices for IP Address Management
+- Static IP Address Configuration Methodology
+- Dynamic Host Configuration Protocol (DHCP) Architecture
+- DHCP Message Format and Packet Structure
+- DORA Process (Discover, Offer, Request, Acknowledge)
+- DHCP Lease Lifecycle Management
+- DHCP Scope Design and Configuration
+- DHCP Options and Parameters (RFC 2132)
+- DHCP Relay Agents and IP Helper Addresses
+- DHCP Failover and High Availability
+- DHCPv6 for IPv6 Networks
+- DHCP Security Considerations
+- Troubleshooting DHCP Issues
+- APIPA (Automatic Private IP Addressing)
+- Best Practices for IP Address Management
 
 **Format will include:**
 - Formal definitions and terminology
@@ -753,16 +738,16 @@ This section is reserved for formal academic textbook content covering Dynamic v
   lesson_summary: `**Quick Summary: Dynamic vs Static IP & DHCP**
 
 **Static IP:**
-• Manually configured on each device
-• Predictable, consistent addresses
-• Best for: servers, network devices, printers
-• Disadvantages: time-consuming, error-prone
+- Manually configured on each device
+- Predictable, consistent addresses
+- Best for: servers, network devices, printers
+- Disadvantages: time-consuming, error-prone
 
 **Dynamic IP (DHCP):**
-• Automatically assigned by DHCP server
-• Zero-touch configuration
-• Best for: workstations, laptops, mobile devices
-• Disadvantages: requires DHCP server
+- Automatically assigned by DHCP server
+- Zero-touch configuration
+- Best for: workstations, laptops, mobile devices
+- Disadvantages: requires DHCP server
 
 **DHCP DORA Process:**
 1. **D**iscover - Client broadcasts "need IP"
@@ -771,56 +756,56 @@ This section is reserved for formal academic textbook content covering Dynamic v
 4. **A**cknowledge - Server confirms assignment
 
 **DHCP Lease Lifecycle:**
-• Acquisition - Get IP via DORA
-• 50% - Try renew with same server (unicast)
-• 87.5% - Broadcast for any server
-• 100% - Lease expires, use APIPA
+- Acquisition - Get IP via DORA
+- 50% - Try renew with same server (unicast)
+- 87.5% - Broadcast for any server
+- 100% - Lease expires, use APIPA
 
 **DHCP Scope Components:**
-• IP address range (start/end)
-• Subnet mask
-• Exclusions (reserved IPs)
-• Reservations (MAC → specific IP)
-• Lease duration
-• Default gateway (Option 3)
-• DNS servers (Option 6)
-• Domain name (Option 15)
+- IP address range (start/end)
+- Subnet mask
+- Exclusions (reserved IPs)
+- Reservations (MAC → specific IP)
+- Lease duration
+- Default gateway (Option 3)
+- DNS servers (Option 6)
+- Domain name (Option 15)
 
 **Common DHCP Options:**
-• Option 3 - Default gateway
-• Option 6 - DNS servers
-• Option 15 - Domain name
-• Option 42 - NTP servers
-• Option 66 - TFTP server
-• Option 150 - TFTP server (VoIP)
+- Option 3 - Default gateway
+- Option 6 - DNS servers
+- Option 15 - Domain name
+- Option 42 - NTP servers
+- Option 66 - TFTP server
+- Option 150 - TFTP server (VoIP)
 
 **APIPA (169.254.x.x):**
-• Auto-assigned when DHCP fails
-• Link-local only
-• Indicates DHCP problem
+- Auto-assigned when DHCP fails
+- Link-local only
+- Indicates DHCP problem
 
 **Troubleshooting Commands:**
 Windows:
-• ipconfig /all - View configuration
-• ipconfig /release - Release IP
-• ipconfig /renew - Get new IP
-• ipconfig /displaydns - Show DNS cache
+- ipconfig /all - View configuration
+- ipconfig /release - Release IP
+- ipconfig /renew - Get new IP
+- ipconfig /displaydns - Show DNS cache
 
 Linux:
-• ip addr - View configuration
-• dhclient -r - Release IP
-• dhclient - Get new IP
+- ip addr - View configuration
+- dhclient -r - Release IP
+- dhclient - Get new IP
 
 **Common Issues:**
-• 169.254.x.x = DHCP failed
-• Wrong subnet = Rogue DHCP or wrong VLAN
-• Duplicate IP = Static overlaps DHCP range
-• Exhausted pool = Too many devices or short lease
+- 169.254.x.x = DHCP failed
+- Wrong subnet = Rogue DHCP or wrong VLAN
+- Duplicate IP = Static overlaps DHCP range
+- Exhausted pool = Too many devices or short lease
 
 **Security:**
-• DHCP Snooping - Blocks rogue DHCP servers
-• Port security - Limits MACs per port
-• 802.1X - Authentication before network access
+- DHCP Snooping - Blocks rogue DHCP servers
+- Port security - Limits MACs per port
+- 802.1X - Authentication before network access
 
 **Best Practices:**
 ✅ Static for infrastructure
@@ -833,10 +818,10 @@ Linux:
 ✅ Document scope configurations
 
 **Lease Time Recommendations:**
-• Guests/high turnover: 1-4 hours
-• Office workstations: 4-8 hours
-• Stable environments: 1-7 days
-• Infrastructure: Use reservations, 8+ days`,
+- Guests/high turnover: 1-4 hours
+- Office workstations: 4-8 hours
+- Stable environments: 1-7 days
+- Infrastructure: Use reservations, 8+ days`,
 
   // QUIZ QUESTIONS
   quiz_questions: [
@@ -947,7 +932,7 @@ Linux:
     { term: "ipconfig /renew", definition: "Windows command to request new DHCP lease" }
   ],
 
-  gameType: null, // Could create DHCP sequence game
+gameType: 'dhcp-troubleshooter',
 
   hands_on_exercise: `DHCP Lab Exercises:
 

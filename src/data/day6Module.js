@@ -126,28 +126,26 @@ Ethernet is THE dominant Layer 2 (Data Link) technology for LANs. Invented by Ro
 **Cable Pinout - T568A vs T568B:**
 
 **T568B (More Common):**
-```
-Pin 1: Orange/White
-Pin 2: Orange
-Pin 3: Green/White
-Pin 4: Blue
-Pin 5: Blue/White
-Pin 6: Green
-Pin 7: Brown/White
-Pin 8: Brown
-```
+
+  Pin 1: Orange/White
+  Pin 2: Orange
+  Pin 3: Green/White
+  Pin 4: Blue
+  Pin 5: Blue/White
+  Pin 6: Green
+  Pin 7: Brown/White
+  Pin 8: Brown
 
 **T568A (Less Common):**
-```
-Pin 1: Green/White
-Pin 2: Green
-Pin 3: Orange/White
-Pin 4: Blue
-Pin 5: Blue/White
-Pin 6: Orange
-Pin 7: Brown/White
-Pin 8: Brown
-```
+
+  Pin 1: Green/White
+  Pin 2: Green
+  Pin 3: Orange/White
+  Pin 4: Blue
+  Pin 5: Blue/White
+  Pin 6: Orange
+  Pin 7: Brown/White
+  Pin 8: Brown
 
 **Straight-Through Cable:**
 - Same pinout both ends (T568B ↔ T568B)
@@ -168,13 +166,11 @@ Pin 8: Brown
 
 An Ethernet frame is the Data Link layer packet:
 
-```
-┌─────────────┬─────────┬──────────┬────────┬─────┬─────┐
-│  Preamble   │   SFD   │   Dest   │  Source│Type │Data │ FCS│
-│   7 bytes   │ 1 byte  │   MAC    │  MAC   │     │     │    │
-│             │         │  6 bytes │6 bytes │2 by │46-1500│4 by│
-└─────────────┴─────────┴──────────┴────────┴─────┴─────┘
-```
+  ┌─────────────┬─────────┬──────────┬────────┬─────┬─────┐
+  │  Preamble   │   SFD   │   Dest   │  Source│Type │Data │ FCS│
+  │   7 bytes   │ 1 byte  │   MAC    │  MAC   │     │     │    │
+  │             │         │  6 bytes │6 bytes │2 by │46-1500│4 by│
+  └─────────────┴─────────┴──────────┴────────┴─────┴─────┘
 
 **Preamble (7 bytes):**
 - 10101010 repeated 7 times
@@ -220,10 +216,9 @@ An Ethernet frame is the Data Link layer packet:
 **MAC Address Structure:**
 
 48 bits (6 bytes) in hexadecimal:
-```
-AA:BB:CC:DD:EE:FF
-└──OUI──┘ └─NIC─┘
-```
+
+  AA:BB:CC:DD:EE:FF
+  └──OUI──┘ └─NIC─┘
 
 **OUI (Organizationally Unique Identifier):**
 - First 24 bits (3 bytes)
@@ -241,18 +236,18 @@ AA:BB:CC:DD:EE:FF
 **Special MAC Addresses:**
 
 **Broadcast MAC:**
-```
-FF:FF:FF:FF:FF:FF
-```
+
+  FF:FF:FF:FF:FF:FF
+
 - All 1s in binary
 - Goes to every device
 - Used for ARP, DHCP Discover
 
 **Multicast MAC:**
-```
-01:00:5E:XX:XX:XX (IPv4 multicast)
-33:33:XX:XX:XX:XX (IPv6 multicast)
-```
+
+  01:00:5E:XX:XX:XX (IPv4 multicast)
+  33:33:XX:XX:XX:XX (IPv6 multicast)
+
 - First bit of first byte = 1
 - Goes to group of devices
 
@@ -297,14 +292,12 @@ Switch looks at DESTINATION MAC:
 
 **MAC Address Table Example:**
 
-```
-Port  | MAC Address       | VLAN | Age
-------|-------------------|------|-----
-Gi0/1 | AA:BB:CC:DD:EE:01 | 1    | 120
-Gi0/2 | AA:BB:CC:DD:EE:02 | 1    | 45
-Gi0/3 | AA:BB:CC:DD:EE:03 | 10   | 280
-Gi0/24| AA:BB:CC:DD:EE:FF | 1    | 15
-```
+  Port  | MAC Address       | VLAN | Age
+  ------|-------------------|------|-----
+  Gi0/1 | AA:BB:CC:DD:EE:01 | 1    | 120
+  Gi0/2 | AA:BB:CC:DD:EE:02 | 1    | 45
+  Gi0/3 | AA:BB:CC:DD:EE:03 | 10   | 280
+  Gi0/24| AA:BB:CC:DD:EE:FF | 1    | 15
 
 **Switch Forwarding Methods:**
 
@@ -434,12 +427,11 @@ STP creates loop-free topology:
 **Port Security:**
 
 Limits which MAC addresses can connect:
-```
-switchport port-security
-switchport port-security maximum 2
-switchport port-security mac-address sticky
-switchport port-security violation shutdown
-```
+
+  switchport port-security
+  switchport port-security maximum 2
+  switchport port-security mac-address sticky
+  switchport port-security violation shutdown
 
 **Violations:**
 - **Shutdown:** Port disables (default)
@@ -511,11 +503,10 @@ Prevents broadcast/multicast storms:
 - Broadcast storm
 
 **Diagnosis:**
-```
-show interface status          # Check speed/duplex
-show interface counters errors # Check error counts
-show mac address-table         # Verify MAC learning
-```
+
+  show interface status          # Check speed/duplex
+  show interface counters errors # Check error counts
+  show mac address-table         # Verify MAC learning
 
 **Problem: Intermittent Connectivity**
 
@@ -537,13 +528,12 @@ show mac address-table         # Verify MAC learning
 6. MAC address learned?
 
 **Commands:**
-```
-show interfaces               # Interface status
-show mac address-table       # MAC learning
-show vlan brief              # VLAN membership
-show spanning-tree           # STP status
-show port-security           # Security violations
-```
+
+  show interfaces               # Interface status
+  show mac address-table       # MAC learning
+  show vlan brief              # VLAN membership
+  show spanning-tree           # STP status
+  show port-security           # Security violations
 
 **🎓 Best Practices**
 
@@ -595,21 +585,21 @@ You're now an Ethernet and switching expert! 🎓`,
 This section is reserved for formal academic textbook content covering Ethernet Fundamentals and Layer 2 Switching.
 
 **Topics to be covered:**
-• IEEE 802.3 Ethernet Standards Evolution
-• Ethernet Frame Structure and Encapsulation
-• MAC Address Architecture and Assignment
-• Switched Ethernet Network Design
-• Bridge and Switch Operation Principles
-• MAC Address Learning and Forwarding
-• Collision Domains and Broadcast Domains
-• CSMA/CD Protocol (Historical Context)
-• Full-Duplex and Half-Duplex Operation
-• Spanning Tree Protocol (STP/RSTP/MSTP)
-• Switch Port Security and Storm Control
-• Ethernet Cable Standards (Cat5e/6/6a/7)
-• Copper and Fiber Optic Media
-• Troubleshooting Layer 2 Networks
-• Performance Optimization Techniques
+- IEEE 802.3 Ethernet Standards Evolution
+- Ethernet Frame Structure and Encapsulation
+- MAC Address Architecture and Assignment
+- Switched Ethernet Network Design
+- Bridge and Switch Operation Principles
+- MAC Address Learning and Forwarding
+- Collision Domains and Broadcast Domains
+- CSMA/CD Protocol (Historical Context)
+- Full-Duplex and Half-Duplex Operation
+- Spanning Tree Protocol (STP/RSTP/MSTP)
+- Switch Port Security and Storm Control
+- Ethernet Cable Standards (Cat5e/6/6a/7)
+- Copper and Fiber Optic Media
+- Troubleshooting Layer 2 Networks
+- Performance Optimization Techniques
 
 **Format will include:**
 - Formal definitions and terminology
@@ -629,35 +619,35 @@ This section is reserved for formal academic textbook content covering Ethernet 
   lesson_summary: `**Quick Summary: Ethernet & Switching**
 
 **Ethernet Standards:**
-• 100BASE-TX - 100 Mbps, Cat5/5e, 100m
-• 1000BASE-T - 1 Gbps, Cat5e/6, 100m ⭐
-• 10GBASE-T - 10 Gbps, Cat6a, 100m
+- 100BASE-TX - 100 Mbps, Cat5/5e, 100m
+- 1000BASE-T - 1 Gbps, Cat5e/6, 100m ⭐
+- 10GBASE-T - 10 Gbps, Cat6a, 100m
 
 **Cable Categories:**
-• Cat5e - Up to 1 Gbps, minimum acceptable
-• Cat6 - Up to 10 Gbps (55m), current standard
-• Cat6a - 10 Gbps @ 100m, best for new installs
+- Cat5e - Up to 1 Gbps, minimum acceptable
+- Cat6 - Up to 10 Gbps (55m), current standard
+- Cat6a - 10 Gbps @ 100m, best for new installs
 
 **Cable Types:**
-• Straight-through - Different devices (PC-Switch)
-• Crossover - Same devices (Switch-Switch)
-• Auto-MDIX - Auto-detects cable type
+- Straight-through - Different devices (PC-Switch)
+- Crossover - Same devices (Switch-Switch)
+- Auto-MDIX - Auto-detects cable type
 
 **Ethernet Frame:**
-• Preamble (7) + SFD (1)
-• Destination MAC (6)
-• Source MAC (6)
-• EtherType (2)
-• Data (46-1500)
-• FCS (4)
-• Total: 64-1518 bytes
+- Preamble (7) + SFD (1)
+- Destination MAC (6)
+- Source MAC (6)
+- EtherType (2)
+- Data (46-1500)
+- FCS (4)
+- Total: 64-1518 bytes
 
 **MAC Address:**
-• 48 bits (6 bytes)
-• Format: AA:BB:CC:DD:EE:FF
-• First 24 bits = OUI (manufacturer)
-• Last 24 bits = NIC specific
-• Broadcast: FF:FF:FF:FF:FF:FF
+- 48 bits (6 bytes)
+- Format: AA:BB:CC:DD:EE:FF
+- First 24 bits = OUI (manufacturer)
+- Last 24 bits = NIC specific
+- Broadcast: FF:FF:FF:FF:FF:FF
 
 **Switch Operation:**
 1. **Learn** - Read source MAC, store with port
@@ -666,46 +656,46 @@ This section is reserved for formal academic textbook content covering Ethernet 
 4. **Filter** - Don't forward back to source
 
 **Switch Methods:**
-• Store-and-Forward - Checks FCS, most reliable ⭐
-• Cut-Through - Fast, no error checking
-• Fragment-Free - Reads 64 bytes
+- Store-and-Forward - Checks FCS, most reliable ⭐
+- Cut-Through - Fast, no error checking
+- Fragment-Free - Reads 64 bytes
 
 **Collision vs Broadcast Domains:**
 
 **Collision Domain:**
-• Hub - All ports share (bad!)
-• Switch - One per port (good!)
-• Full-duplex - No collisions
+- Hub - All ports share (bad!)
+- Switch - One per port (good!)
+- Full-duplex - No collisions
 
 **Broadcast Domain:**
-• Hub - All ports
-• Switch - All ports (same VLAN)
-• Router - Separate per interface
+- Hub - All ports
+- Switch - All ports (same VLAN)
+- Router - Separate per interface
 
 **Full vs Half-Duplex:**
-• Full-Duplex - Send & receive simultaneously ⭐
-• Half-Duplex - Send OR receive, collisions possible
+- Full-Duplex - Send & receive simultaneously ⭐
+- Half-Duplex - Send OR receive, collisions possible
 
 **STP (Spanning Tree Protocol):**
-• Prevents network loops
-• Blocks redundant paths
-• Unblocks if link fails
-• Port states: Forwarding, Blocking, Learning
+- Prevents network loops
+- Blocks redundant paths
+- Unblocks if link fails
+- Port states: Forwarding, Blocking, Learning
 
 **Port Security:**
-• Limits MAC addresses per port
-• Violations: Shutdown, Restrict, Protect
-• Sticky MAC learning
+- Limits MAC addresses per port
+- Violations: Shutdown, Restrict, Protect
+- Sticky MAC learning
 
 **Common Issues:**
-• No link light = Bad cable/port
-• Slow performance = Duplex mismatch
-• Intermittent = Loose cable, STP
+- No link light = Bad cable/port
+- Slow performance = Duplex mismatch
+- Intermittent = Loose cable, STP
 
 **Hub vs Switch vs Router:**
-• Hub (L1) - Repeat, share bandwidth, obsolete
-• Switch (L2) - MAC-based, per-port collision domain
-• Router (L3) - IP-based, separates broadcast domains
+- Hub (L1) - Repeat, share bandwidth, obsolete
+- Switch (L2) - MAC-based, per-port collision domain
+- Router (L3) - IP-based, separates broadcast domains
 
 **Best Practices:**
 ✅ Cat6 minimum for new installs
@@ -825,28 +815,28 @@ This section is reserved for formal academic textbook content covering Ethernet 
     { term: "MTU", definition: "Maximum Transmission Unit - 1500 bytes for Ethernet" }
   ],
 
-  gameType: null, // Could create MAC address matching game
+  gameType: 'ethernet-master',
 
   hands_on_exercise: `Ethernet & Switching Lab Exercises:
 
 **Exercise 1: View MAC Address**
 Windows:
-• ipconfig /all - Find "Physical Address"
-• getmac - Show all adapters
+- ipconfig /all - Find "Physical Address"
+- getmac - Show all adapters
 
 Linux/Mac:
-• ip link show - View MAC addresses
-• ifconfig - Alternative method
+- ip link show - View MAC addresses
+- ifconfig - Alternative method
 
 Document your MAC address and identify the OUI (first 3 bytes).
 Lookup the manufacturer at: https://www.macvendors.com
 
 **Exercise 2: View ARP Table (MAC to IP)**
 Windows:
-• arp -a - Display ARP table
-• arp -d - Clear ARP cache
-• ping [IP] - Generate ARP entry
-• arp -a - View new entry
+- arp -a - Display ARP table
+- arp -d - Clear ARP cache
+- ping [IP] - Generate ARP entry
+- arp -a - View new entry
 
 Note: ARP maps IP addresses to MAC addresses
 

@@ -17,10 +17,8 @@ An IP address is like a postal address for your computer on a network. Just like
 
 An IPv4 address is **32 bits** divided into **4 octets** (8 bits each):
 
-```
 192.168.1.100
 [8 bits].[8 bits].[8 bits].[8 bits]
-```
 
 Each octet can be 0-255 (that's 2^8 = 256 possibilities per octet!)
 
@@ -28,17 +26,14 @@ Each octet can be 0-255 (that's 2^8 = 256 possibilities per octet!)
 
 Let's break down 192.168.1.100 in binary:
 
-```
 192      = 11000000
 168      = 10101000
 1        = 00000001
 100      = 01100100
-```
 
 **Binary Place Values:**
-```
+
 128 | 64 | 32 | 16 | 8 | 4 | 2 | 1
-```
 
 Example: Converting 192 to binary
 - 192 ÷ 128 = 1 remainder 64  →  **1**
@@ -127,12 +122,10 @@ A subnet mask tells us: "Which part is the network? Which part is the host?"
 
 **Subnet Mask in Binary:**
 
-```
 255.255.255.0 = 11111111.11111111.11111111.00000000
 
 Network bits = 1
 Host bits = 0
-```
 
 **CIDR Notation (Classless Inter-Domain Routing):**
 
@@ -156,7 +149,7 @@ Instead of writing 255.255.255.0, we write **/24**
 **📊 Subnetting Magic - The Powers of 2**
 
 **Memorize These Powers of 2:**
-```
+
 2^1 = 2
 2^2 = 4
 2^3 = 8
@@ -165,7 +158,6 @@ Instead of writing 255.255.255.0, we write **/24**
 2^6 = 64
 2^7 = 128
 2^8 = 256
-```
 
 **The Subnetting Formula:**
 
@@ -175,7 +167,6 @@ Instead of writing 255.255.255.0, we write **/24**
 
 **Subnet Mask Cheat Sheet:**
 
-```
 /24 = 255.255.255.0    → 256 addresses → 254 hosts → 1 subnet
 /25 = 255.255.255.128  → 128 addresses → 126 hosts → 2 subnets
 /26 = 255.255.255.192  → 64 addresses  → 62 hosts  → 4 subnets
@@ -183,7 +174,6 @@ Instead of writing 255.255.255.0, we write **/24**
 /28 = 255.255.255.240  → 16 addresses  → 14 hosts  → 16 subnets
 /29 = 255.255.255.248  → 8 addresses   → 6 hosts   → 32 subnets
 /30 = 255.255.255.252  → 4 addresses   → 2 hosts   → 64 subnets
-```
 
 **🎯 Subnetting Example 1: Basic Subnetting**
 
@@ -203,7 +193,7 @@ Instead of writing 255.255.255.0, we write **/24**
 - Each subnet has 64 addresses
 
 **Step 4: Subnet ranges**
-```
+
 Subnet 1: 192.168.1.0/26
   Network:    192.168.1.0
   First host: 192.168.1.1
@@ -227,7 +217,6 @@ Subnet 4: 192.168.1.192/26
   First host: 192.168.1.193
   Last host:  192.168.1.254
   Broadcast:  192.168.1.255
-```
 
 **🎯 Subnetting Example 2: VLSM (Variable Length Subnet Masking)**
 
@@ -271,13 +260,12 @@ Given: 192.168.5.130/26
 - 130 falls in 128 block
 
 **Step 3: Determine addresses**
-```
+
 Network:    192.168.5.128
 First host: 192.168.5.129
 Last host:  192.168.5.190
 Broadcast:  192.168.5.191
 Next subnet: 192.168.5.192
-```
 
 **🌍 IPv6 - The Future (and Present)**
 
@@ -291,25 +279,21 @@ Next subnet: 192.168.5.192
 
 **128 bits** divided into **8 groups** of **16 bits each** (hexadecimal):
 
-```
 2001:0db8:85a3:0000:0000:8a2e:0370:7334
-```
 
 **IPv6 Shortening Rules:**
 
 **Rule 1: Remove leading zeros**
-```
+
 2001:0db8:85a3:0000:0000:8a2e:0370:7334
 becomes
 2001:db8:85a3:0:0:8a2e:370:7334
-```
 
 **Rule 2: Replace consecutive zeros with ::**
-```
+
 2001:db8:85a3:0:0:8a2e:370:7334
 becomes
 2001:db8:85a3::8a2e:370:7334
-```
 
 **Important:** Can only use :: once in an address!
 
@@ -364,12 +348,11 @@ Similar to CIDR notation:
 Much simpler than IPv4!
 
 **Standard /64 subnet:**
-```
+
 2001:0db8:1234:5678::/64
 
 Network portion: 2001:0db8:1234:5678
 Host portion:    0000:0000:0000:0000
-```
 
 **Example: Subnetting /48 into /64s**
 
@@ -379,13 +362,12 @@ Available for subnetting: bits 48-64 (16 bits)
 - 2^16 = 65,536 /64 subnets!
 
 **Subnets:**
-```
+
 2001:db8:1234:0000::/64
 2001:db8:1234:0001::/64
 2001:db8:1234:0002::/64
 ...
 2001:db8:1234:ffff::/64
-```
 
 **IPv6 Address Configuration:**
 
@@ -431,7 +413,7 @@ For router-to-router connections:
 - Or /31 (RFC 3021) for exactly 2 addresses
 
 **Example:**
-```
+
 Link 1: 10.0.0.0/30
   Router A: 10.0.0.1
   Router B: 10.0.0.2
@@ -439,7 +421,6 @@ Link 1: 10.0.0.0/30
 Link 2: 10.0.0.4/30
   Router B: 10.0.0.5
   Router C: 10.0.0.6
-```
 
 **🎓 Subnetting Tricks & Tips**
 
@@ -466,13 +447,11 @@ To find network address:
 
 **Example:** 192.168.15.75/27
 
-```
 IP:    11000000.10101000.00001111.01001011
 Mask:  11111111.11111111.11111111.11100000
        ------------------------------------
 AND:   11000000.10101000.00001111.01000000
        = 192.168.15.64 (network address)
-```
 
 **Common Subnetting Questions:**
 
@@ -582,7 +561,7 @@ This section is reserved for formal academic textbook content covering IPv4/IPv6
 • Broadcast: 255.255.255.255
 
 **Common Subnet Masks:**
-```
+
 /24 = 255.255.255.0    → 254 hosts
 /25 = 255.255.255.128  → 126 hosts
 /26 = 255.255.255.192  → 62 hosts
@@ -590,7 +569,6 @@ This section is reserved for formal academic textbook content covering IPv4/IPv6
 /28 = 255.255.255.240  → 14 hosts
 /29 = 255.255.255.248  → 6 hosts
 /30 = 255.255.255.252  → 2 hosts (point-to-point)
-```
 
 **Subnetting Formulas:**
 • Subnets: 2^n (n = borrowed bits)
@@ -605,10 +583,9 @@ This section is reserved for formal academic textbook content covering IPv4/IPv6
 5. Network, First Host, Last Host, Broadcast
 
 **Powers of 2 (Memorize!):**
-```
+
 2^1=2, 2^2=4, 2^3=8, 2^4=16
 2^5=32, 2^6=64, 2^7=128, 2^8=256
-```
 
 **IPv6 Basics:**
 • 128 bits, 8 groups of 16 bits
@@ -754,7 +731,7 @@ This section is reserved for formal academic textbook content covering IPv4/IPv6
     { term: "255.255.255.255", definition: "Limited broadcast, stays on local network" }
   ],
 
-  gameType: null, // Could create subnet calculator game
+  gameType: 'subnet-speedster',
 
   hands_on_exercise: `Subnetting Practice Lab:
 

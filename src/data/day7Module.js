@@ -61,69 +61,63 @@ Congratulations on making it through Week 1! 🎉 Today we're pulling everything
 **🎯 Critical Concepts You MUST Know**
 
 **OSI Model (Please Do Not Throw Sausage Pizza Away):**
-```
-7. Application  - HTTP, FTP, SMTP, DNS
-6. Presentation - Encryption, compression
-5. Session      - Establish/maintain connections
-4. Transport    - TCP/UDP, ports, segments
-3. Network      - IP addressing, routing, routers
-2. Data Link    - MAC addresses, switches, frames
-1. Physical     - Cables, signals, bits
-```
+
+  7. Application  - HTTP, FTP, SMTP, DNS
+  6. Presentation - Encryption, compression
+  5. Session      - Establish/maintain connections
+  4. Transport    - TCP/UDP, ports, segments
+  3. Network      - IP addressing, routing, routers
+  2. Data Link    - MAC addresses, switches, frames
+  1. Physical     - Cables, signals, bits
 
 **Must-Know Port Numbers:**
-```
-20/21  - FTP          443   - HTTPS ⭐
-22     - SSH/SFTP     445   - SMB
-23     - Telnet       514   - Syslog
-25     - SMTP         587   - SMTPS
-53     - DNS          636   - LDAPS
-67/68  - DHCP         993   - IMAPS
-69     - TFTP         995   - POP3S
-80     - HTTP         1433  - SQL Server
-110    - POP3         3306  - MySQL
-123    - NTP          3389  - RDP
-143    - IMAP         5060/5061 - SIP
-161/162- SNMP
-389    - LDAP
-```
+
+  20/21  - FTP          443   - HTTPS ⭐
+  22     - SSH/SFTP     445   - SMB
+  23     - Telnet       514   - Syslog
+  25     - SMTP         587   - SMTPS
+  53     - DNS          636   - LDAPS
+  67/68  - DHCP         993   - IMAPS
+  69     - TFTP         995   - POP3S
+  80     - HTTP         1433  - SQL Server
+  110    - POP3         3306  - MySQL
+  123    - NTP          3389  - RDP
+  143    - IMAP         5060/5061 - SIP
+  161/162- SNMP
+  389    - LDAP
 
 **TCP vs UDP Quick Reference:**
-```
-TCP (Reliable):              UDP (Fast):
-• Connection-oriented        • Connectionless
-• Guaranteed delivery        • No guarantee
-• Ordered packets           • Unordered
-• Error checking            • Minimal overhead
-• Slower                    • Faster
-• Web, Email, FTP           • Streaming, VoIP, DNS
-```
+
+  TCP (Reliable):              UDP (Fast):
+  • Connection-oriented        • Connectionless
+  • Guaranteed delivery        • No guarantee
+  • Ordered packets           • Unordered
+  • Error checking            • Minimal overhead
+  • Slower                    • Faster
+  • Web, Email, FTP           • Streaming, VoIP, DNS
 
 **Common Subnet Masks:**
-```
-/24 = 255.255.255.0   → 254 hosts
-/25 = 255.255.255.128 → 126 hosts
-/26 = 255.255.255.192 → 62 hosts
-/27 = 255.255.255.224 → 30 hosts
-/28 = 255.255.255.240 → 14 hosts
-/29 = 255.255.255.248 → 6 hosts
-/30 = 255.255.255.252 → 2 hosts (point-to-point)
-```
+
+  /24 = 255.255.255.0   → 254 hosts
+  /25 = 255.255.255.128 → 126 hosts
+  /26 = 255.255.255.192 → 62 hosts
+  /27 = 255.255.255.224 → 30 hosts
+  /28 = 255.255.255.240 → 14 hosts
+  /29 = 255.255.255.248 → 6 hosts
+  /30 = 255.255.255.252 → 2 hosts (point-to-point)
 
 **Private Address Ranges:**
-```
-10.0.0.0/8         → 16,777,214 hosts
-172.16.0.0/12      → 1,048,574 hosts
-192.168.0.0/16     → 65,534 hosts
-```
+
+  10.0.0.0/8         → 16,777,214 hosts
+  172.16.0.0/12      → 1,048,574 hosts
+  192.168.0.0/16     → 65,534 hosts
 
 **Special Addresses:**
-```
-127.0.0.1          → Loopback
-169.254.x.x        → APIPA (DHCP failed)
-255.255.255.255    → Limited broadcast
-FF:FF:FF:FF:FF:FF  → Broadcast MAC
-```
+
+  127.0.0.1          → Loopback
+  169.254.x.x        → APIPA (DHCP failed)
+  255.255.255.255    → Limited broadcast
+  FF:FF:FF:FF:FF:FF  → Broadcast MAC
 
 **🎬 Real-World Scenarios - Let's Practice!**
 
@@ -145,29 +139,27 @@ You're setting up a new office with 50 employees. You have:
 **Solution:**
 
 **IP Addressing Plan:**
-```
-Gateway:    192.168.10.1
-DHCP Range: 192.168.10.100-192.168.10.200 (101 IPs)
-Static IPs:
-  File Server:  192.168.10.10
-  Printer 1:    192.168.10.20
-  Printer 2:    192.168.10.21
-  Switch 1:     192.168.10.2
-  Switch 2:     192.168.10.3
-```
+
+  Gateway:    192.168.10.1
+  DHCP Range: 192.168.10.100-192.168.10.200 (101 IPs)
+  Static IPs:
+    File Server:  192.168.10.10
+    Printer 1:    192.168.10.20
+    Printer 2:    192.168.10.21
+    Switch 1:     192.168.10.2
+    Switch 2:     192.168.10.3
 
 **DHCP Configuration:**
-```
-Scope: 192.168.10.0/24
-Range: 192.168.10.100-192.168.10.200
-Mask: 255.255.255.0
-Gateway: 192.168.10.1
-DNS: 8.8.8.8, 8.8.4.4
-Lease: 8 hours
-Exclusions: 192.168.10.1-192.168.10.99
-Reservations:
-  00:11:22:33:44:55 → 192.168.10.50 (Manager laptop)
-```
+
+  Scope: 192.168.10.0/24
+  Range: 192.168.10.100-192.168.10.200
+  Mask: 255.255.255.0
+  Gateway: 192.168.10.1
+  DNS: 8.8.8.8, 8.8.4.4
+  Lease: 8 hours
+  Exclusions: 192.168.10.1-192.168.10.99
+  Reservations:
+    00:11:22:33:44:55 → 192.168.10.50 (Manager laptop)
 
 **Scenario 2: Connectivity Troubleshooting**
 
@@ -177,54 +169,48 @@ User reports: "I can't access the company website!"
 **Step-by-Step Diagnosis:**
 
 **Step 1: Check Physical Layer**
-```
-Question: Is network cable plugged in?
-Check: Link light on NIC/switch
-Action: If no light, check cable
-```
+
+  Question: Is network cable plugged in?
+  Check: Link light on NIC/switch
+  Action: If no light, check cable
 
 **Step 2: Check IP Configuration**
-```
-Command: ipconfig /all (Windows) or ip addr (Linux)
-Check: 
-  - Valid IP? (not 169.254.x.x)
-  - Correct subnet?
-  - Gateway configured?
-  - DNS servers listed?
 
-If APIPA (169.254.x.x):
-  Problem: DHCP failure
-  Action: Check DHCP server, try ipconfig /renew
-```
+  Command: ipconfig /all (Windows) or ip addr (Linux)
+  Check: 
+    - Valid IP? (not 169.254.x.x)
+    - Correct subnet?
+    - Gateway configured?
+    - DNS servers listed?
+
+  If APIPA (169.254.x.x):
+    Problem: DHCP failure
+    Action: Check DHCP server, try ipconfig /renew
 
 **Step 3: Test Local Network**
-```
-Command: ping [gateway IP]
-Success: Local network OK
-Failure: Local network problem (cable, switch, gateway down)
-```
+
+  Command: ping [gateway IP]
+  Success: Local network OK
+  Failure: Local network problem (cable, switch, gateway down)
 
 **Step 4: Test Internet**
-```
-Command: ping 8.8.8.8
-Success: Internet connectivity OK
-Failure: Router/ISP problem
-```
+
+  Command: ping 8.8.8.8
+  Success: Internet connectivity OK
+  Failure: Router/ISP problem
 
 **Step 5: Test DNS**
-```
-Command: nslookup company.com
-Success: DNS working
-Failure: DNS server problem
-  Action: Try different DNS (8.8.8.8)
-```
+
+  Command: nslookup company.com
+  Success: DNS working
+  Failure: DNS server problem
+    Action: Try different DNS (8.8.8.8)
 
 **Step 6: Test Website**
-```
-Command: Try accessing website
-Success: Problem was temporary
-Failure: Website down or firewall blocking
-```
+
+  Command: Try accessing website
+  Success: Problem was temporary
+  Failure: Website down or firewall blocking
 
 **Scenario 3: Slow Network Performance**
 
@@ -234,33 +220,29 @@ Network is slow, users complaining about lag.
 **Investigation Process:**
 
 **Check 1: Duplex Mismatch**
-```
-Switch shows: Half-duplex on several ports
-Problem: Performance degradation, collisions
-Solution: Set all ports to full-duplex
-```
+
+  Switch shows: Half-duplex on several ports
+  Problem: Performance degradation, collisions
+  Solution: Set all ports to full-duplex
 
 **Check 2: Broadcast Storm**
-```
-Switch shows: High broadcast traffic
-Problem: Loop in network
-Solution: Check STP, find and remove loop
-```
+
+  Switch shows: High broadcast traffic
+  Problem: Loop in network
+  Solution: Check STP, find and remove loop
 
 **Check 3: Bandwidth Saturation**
-```
-Monitor shows: Interface at 100% utilization
-Problem: Too much traffic for link
-Solution: Upgrade to faster link or QoS
-```
+
+  Monitor shows: Interface at 100% utilization
+  Problem: Too much traffic for link
+  Solution: Upgrade to faster link or QoS
 
 **Check 4: DNS Issues**
-```
-Users report: Websites load slowly
-Test: nslookup is slow
-Problem: DNS server slow/overloaded
-Solution: Use faster DNS (8.8.8.8, 1.1.1.1)
-```
+
+  Users report: Websites load slowly
+  Test: nslookup is slow
+  Problem: DNS server slow/overloaded
+  Solution: Use faster DNS (8.8.8.8, 1.1.1.1)
 
 **Scenario 4: DHCP Problems**
 
@@ -270,89 +252,82 @@ Solution: Use faster DNS (8.8.8.8, 1.1.1.1)
 **Diagnosis:**
 
 **Problem 1: Scope Exhausted**
-```
-Check: show ip dhcp binding (router/server)
-Finding: All IPs assigned
-Solution: Expand scope range
-  OR: Reduce lease time
-  OR: Clear stale leases
-```
+
+  Check: show ip dhcp binding (router/server)
+  Finding: All IPs assigned
+  Solution: Expand scope range
+    OR: Reduce lease time
+    OR: Clear stale leases
 
 **Problem 2: Rogue DHCP Server**
-```
-Symptom: Clients getting wrong subnet
-Check: ipconfig /all on affected clients
-Finding: Gateway on different subnet
-Solution: 
-  - Enable DHCP snooping on switches
-  - Find and remove rogue server
-```
+
+  Symptom: Clients getting wrong subnet
+  Check: ipconfig /all on affected clients
+  Finding: Gateway on different subnet
+  Solution: 
+    - Enable DHCP snooping on switches
+    - Find and remove rogue server
 
 **Problem 3: DHCP Server Down**
-```
-Symptom: All clients getting APIPA
-Check: Can you ping DHCP server?
-Finding: DHCP server offline
-Solution: 
-  - Restart DHCP service
-  - Check server connectivity
-  - Verify firewall rules
-```
+
+  Symptom: All clients getting APIPA
+  Check: Can you ping DHCP server?
+  Finding: DHCP server offline
+  Solution: 
+    - Restart DHCP service
+    - Check server connectivity
+    - Verify firewall rules
 
 **Problem 4: Wrong VLAN**
-```
-Symptom: Some clients can't get DHCP
-Check: Switch port VLAN assignment
-Finding: Clients on wrong VLAN
-Solution: Correct VLAN assignment
-```
+
+  Symptom: Some clients can't get DHCP
+  Check: Switch port VLAN assignment
+  Finding: Clients on wrong VLAN
+  Solution: Correct VLAN assignment
 
 **🔧 Hands-On Practice Commands**
 
 **Windows Network Commands:**
-```
-ipconfig /all          - View IP configuration
-ipconfig /release      - Release DHCP lease
-ipconfig /renew        - Request new DHCP lease
-ipconfig /flushdns     - Clear DNS cache
-ipconfig /displaydns   - Show DNS cache
 
-ping [IP/hostname]     - Test connectivity
-tracert [IP/hostname]  - Trace route to destination
-nslookup [hostname]    - DNS lookup
-arp -a                 - View ARP cache
-netstat -an            - Show active connections
-route print            - Display routing table
-getmac                 - Display MAC address
-```
+  ipconfig /all          - View IP configuration
+  ipconfig /release      - Release DHCP lease
+  ipconfig /renew        - Request new DHCP lease
+  ipconfig /flushdns     - Clear DNS cache
+  ipconfig /displaydns   - Show DNS cache
+
+  ping [IP/hostname]     - Test connectivity
+  tracert [IP/hostname]  - Trace route to destination
+  nslookup [hostname]    - DNS lookup
+  arp -a                 - View ARP cache
+  netstat -an            - Show active connections
+  route print            - Display routing table
+  getmac                 - Display MAC address
 
 **Linux Network Commands:**
-```
-ip addr                - View IP configuration
-ip link                - View interface status
-ip route               - Display routing table
-dhclient -r            - Release DHCP lease
-dhclient               - Request new DHCP lease
 
-ping [IP/hostname]     - Test connectivity
-traceroute [IP/hostname] - Trace route
-dig [hostname]         - DNS lookup
-nslookup [hostname]    - DNS lookup (alternative)
-arp -a                 - View ARP cache
-netstat -an            - Show connections
-ss -tulpn              - Show listening ports
-```
+  ip addr                - View IP configuration
+  ip link                - View interface status
+  ip route               - Display routing table
+  dhclient -r            - Release DHCP lease
+  dhclient               - Request new DHCP lease
+
+  ping [IP/hostname]     - Test connectivity
+  traceroute [IP/hostname] - Trace route
+  dig [hostname]         - DNS lookup
+  nslookup [hostname]    - DNS lookup (alternative)
+  arp -a                 - View ARP cache
+  netstat -an            - Show connections
+  ss -tulpn              - Show listening ports
 
 **Cisco Switch Commands:**
-```
-show mac address-table           - View MAC table
-show interface status            - Interface overview
-show interface [interface]       - Detailed interface
-show vlan brief                  - VLAN information
-show spanning-tree               - STP status
-show port-security               - Security status
-show ip dhcp binding             - DHCP leases
-```
+
+  show mac address-table           - View MAC table
+  show interface status            - Interface overview
+  show interface [interface]       - Detailed interface
+  show vlan brief                  - VLAN information
+  show spanning-tree               - STP status
+  show port-security               - Security status
+  show ip dhcp binding             - DHCP leases
 
 **📝 Week 1 Practice Questions**
 
@@ -578,18 +553,18 @@ See you in Week 2! 🚀`,
 This section is reserved for formal academic review content covering Week 1 comprehensive material.
 
 **Topics to be covered:**
-• OSI Reference Model Comprehensive Review
-• TCP/IP Protocol Suite Architecture
-• Application Layer Protocol Analysis
-• Transport Layer Mechanisms
-• IPv4 and IPv6 Addressing Schemes
-• Subnetting and VLSM Methodologies
-• Dynamic Host Configuration Protocol
-• Ethernet Standards and Frame Structure
-• Switch Operation and MAC Address Learning
-• Network Troubleshooting Methodologies
-• Performance Analysis and Optimization
-• Security Considerations at Each Layer
+- OSI Reference Model Comprehensive Review
+- TCP/IP Protocol Suite Architecture
+- Application Layer Protocol Analysis
+- Transport Layer Mechanisms
+- IPv4 and IPv6 Addressing Schemes
+- Subnetting and VLSM Methodologies
+- Dynamic Host Configuration Protocol
+- Ethernet Standards and Frame Structure
+- Switch Operation and MAC Address Learning
+- Network Troubleshooting Methodologies
+- Performance Analysis and Optimization
+- Security Considerations at Each Layer
 
 **Format will include:**
 - Comprehensive concept summaries
@@ -751,7 +726,7 @@ Bottom-up: Physical→Data Link→Network→Transport→Application`,
     { term: "OSI Mnemonic", definition: "Please Do Not Throw Sausage Pizza Away" }
   ],
 
-  gameType: null, // Review day - no game
+  gameType: 'week1-gauntlet',
 
   hands_on_exercise: `Week 1 Comprehensive Lab:
 

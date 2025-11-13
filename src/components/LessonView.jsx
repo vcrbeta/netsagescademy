@@ -3,6 +3,10 @@ import { BookOpen, Volume2, Copy, CheckCircle, ExternalLink, FileText, AlignLeft
 import theme from '../styles/theme';
 import OSIMatchingGame from './games/OSIMatchingGame';
 import PortMatchingGame from './games/Portmatchinggame';
+import SubnetSpeedster from './games/SubnetSpeedster';
+import DHCPTroubleshooter from './games/DHCPTroubleshooter';
+import EthernetMasterGame from './games/EthernetMasterGame'; 
+import Week1Gauntlet from './games/Week1Gauntlet';
 
 const LessonView = ({ module }) => {
   const [copied, setCopied] = useState(false);
@@ -49,15 +53,23 @@ const LessonView = ({ module }) => {
 
   // Render the appropriate game based on gameType
   const renderGame = () => {
-    switch(module.gameType) {
-      case 'osi-matching':
-        return <OSIMatchingGame />;
-      case 'port-matching':
-        return <PortMatchingGame />;
-      default:
-        return null;
-    }
-  };
+  switch(module.gameType) {
+    case 'osi-matching':
+      return <OSIMatchingGame />;
+    case 'port-matching':
+      return <PortMatchingGame />;
+    case 'subnet-speedster':
+      return <SubnetSpeedster />;
+    case 'dhcp-troubleshooter':
+      return <DHCPTroubleshooter />;
+    case 'ethernet-master':
+      return <EthernetMasterGame />;
+    case 'week1-gauntlet':
+      return <Week1Gauntlet />;
+    default:
+      return null;
+  }
+};
 
   return (
     <div style={{ 

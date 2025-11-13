@@ -79,22 +79,20 @@ Always use encrypted versions:
    - SYN → SYN-ACK → ACK
    - Connection established on port 80 (HTTP) or 443 (HTTPS)
 
-3. **HTTP Request**
-   ```
-   GET /index.html HTTP/1.1
-   Host: www.example.com
-   User-Agent: Mozilla/5.0
-   Accept: text/html
-   ```
+3. **HTTP Request:**
 
-4. **HTTP Response**
-   ```
-   HTTP/1.1 200 OK
-   Content-Type: text/html
-   Content-Length: 1234
-   
-   <html>...</html>
-   ```
+GET /index.html HTTP/1.1
+Host: www.example.com
+User-Agent: Mozilla/5.0
+Accept: text/html
+
+4. **HTTP Response:**
+
+HTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length: 1234
+
+<html>...</html>
 
 5. **Connection Close**
    - FIN → FIN-ACK → ACK (TCP teardown)
@@ -232,20 +230,19 @@ Always use encrypted versions:
    - Server verifies you have matching private key
 
 **SSH Key Generation:**
-```
+
 ssh-keygen -t rsa -b 4096
-```
+
 Creates:
 - Private key (keep secret!)
 - Public key (distribute to servers)
 
 **Common SSH Commands:**
-```
+
 ssh user@hostname                    # Connect to remote host
 ssh -p 2222 user@hostname           # Connect on different port
 scp file.txt user@host:/path        # Secure copy
 ssh -L 8080:localhost:80 user@host  # Port forwarding
-```
 
 **RDP (Remote Desktop Protocol) - Port 3389:**
 
@@ -275,7 +272,7 @@ Why Telnet is Dangerous:
 ❌ Trivial to intercept
 
 **Only Acceptable Use:**
-- Testing if a port is open: `telnet hostname 80`
+- Testing if a port is open: telnet hostname 80
 - Troubleshooting in isolated lab environments
 - That's it!
 
@@ -349,11 +346,10 @@ Why Telnet is Dangerous:
 **Problem:** Can ping IP addresses but not domain names
 **Diagnosis:** DNS failure
 **Commands to Use:**
-```
+
 nslookup google.com          # Check DNS resolution
 ipconfig /displaydns         # View DNS cache (Windows)
 ipconfig /flushdns          # Clear DNS cache (Windows)
-```
 
 **Problem:** DNS resolves but to wrong IP
 **Possible Causes:**
@@ -543,11 +539,10 @@ Clients don't just get an IP and forget about it!
 **Syslog Configuration:**
 
 **On Network Devices:**
-```
+
 logging host 192.168.1.10
 logging trap 4
 logging facility local7
-```
 
 **Best Practices:**
 ✅ Use appropriate severity levels
@@ -562,21 +557,19 @@ logging facility local7
 **Common Filters:**
 
 **Display Filters:**
-```
+
 http                    # HTTP traffic only
 tcp.port == 80         # Traffic on port 80
 ip.addr == 192.168.1.1 # Specific IP address
 dns                    # DNS queries/responses
 icmp                   # Ping traffic
 tcp.flags.syn == 1     # TCP SYN packets (new connections)
-```
 
 **Capture Filters:**
-```
+
 port 80                # Capture port 80 only
 host 192.168.1.1      # Specific host
 net 192.168.1.0/24    # Entire subnet
-```
 
 **What to Look For:**
 
