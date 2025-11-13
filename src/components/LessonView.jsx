@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { BookOpen, Volume2, Copy, CheckCircle, ExternalLink, FileText, AlignLeft, Book } from 'lucide-react';
+import { BookOpen, Volume2, AlignLeft, Book, FileText } from 'lucide-react';
 import theme from '../styles/theme';
 import OSIMatchingGame from './games/OSIMatchingGame';
 import PortMatchingGame from './games/Portmatchinggame';
@@ -9,8 +9,6 @@ import EthernetMasterGame from './games/EthernetMasterGame';
 import Week1Gauntlet from './games/Week1Gauntlet';
 
 const LessonView = ({ module }) => {
-  const [copied, setCopied] = useState(false);
-  const [autoSelected, setAutoSelected] = useState(false);
   const [contentMode, setContentMode] = useState('full'); // 'full', 'summary', or 'textbook'
   const contentRef = useRef(null);
 
@@ -29,47 +27,27 @@ const LessonView = ({ module }) => {
 
   const currentContent = getCurrentContent();
 
-  const handleCopyForNaturalReader = () => {
-    navigator.clipboard.writeText(currentContent);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
-  const handleSelectText = () => {
-    if (contentRef.current) {
-      const range = document.createRange();
-      range.selectNodeContents(contentRef.current);
-      const selection = window.getSelection();
-      selection.removeAllRanges();
-      selection.addRange(range);
-      setAutoSelected(true);
-      setTimeout(() => setAutoSelected(false), 3000);
-    }
-  };
-
-  const handleOpenNaturalReaderApp = () => {
-    window.open('https://www.naturalreaders.com/online/', '_blank');
-  };
+  
 
   // Render the appropriate game based on gameType
   const renderGame = () => {
-  switch(module.gameType) {
-    case 'osi-matching':
-      return <OSIMatchingGame />;
-    case 'port-matching':
-      return <PortMatchingGame />;
-    case 'subnet-speedster':
-      return <SubnetSpeedster />;
-    case 'dhcp-troubleshooter':
-      return <DHCPTroubleshooter />;
-    case 'ethernet-master':
-      return <EthernetMasterGame />;
-    case 'week1-gauntlet':
-      return <Week1Gauntlet />;
-    default:
-      return null;
-  }
-};
+    switch(module.gameType) {
+      case 'osi-matching':
+        return <OSIMatchingGame />;
+      case 'port-matching':
+        return <PortMatchingGame />;
+      case 'subnet-speedster':
+        return <SubnetSpeedster />;
+      case 'dhcp-troubleshooter':
+        return <DHCPTroubleshooter />;
+      case 'ethernet-master':
+        return <EthernetMasterGame />;
+      case 'week1-gauntlet':
+        return <Week1Gauntlet />;
+      default:
+        return null;
+    }
+  };
 
   return (
     <div style={{ 
@@ -98,98 +76,11 @@ const LessonView = ({ module }) => {
             color: theme.colors.darkNavy,
             fontWeight: '600'
           }}>
-            Listen with Natural Reader
+            Use the Browser Extension to Listen with Natural Reader
           </span>
         </div>
 
-        <div style={{
-          display: 'flex',
-          gap: theme.spacing.sm,
-          flexWrap: 'wrap'
-        }}>
-          <button
-            onClick={handleCopyForNaturalReader}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              padding: `${theme.spacing.sm} ${theme.spacing.md}`,
-              background: copied ? '#10b981' : theme.colors.mediumBlue,
-              color: theme.colors.white,
-              border: 'none',
-              borderRadius: theme.borderRadius.sm,
-              fontSize: theme.fonts.sizes.sm,
-              fontWeight: '600',
-              cursor: 'pointer',
-              fontFamily: theme.fonts.body,
-              transition: 'all 0.2s'
-            }}
-          >
-            {copied ? (
-              <>
-                <CheckCircle size={16} />
-                Copied!
-              </>
-            ) : (
-              <>
-                <Copy size={16} />
-                Copy Text
-              </>
-            )}
-          </button>
-
-          <button
-            onClick={handleSelectText}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              padding: `${theme.spacing.sm} ${theme.spacing.md}`,
-              background: autoSelected ? '#10b981' : theme.colors.white,
-              color: autoSelected ? theme.colors.white : theme.colors.darkNavy,
-              border: `2px solid ${theme.colors.darkNavy}`,
-              borderRadius: theme.borderRadius.sm,
-              fontSize: theme.fonts.sizes.sm,
-              fontWeight: '600',
-              cursor: 'pointer',
-              fontFamily: theme.fonts.body,
-              transition: 'all 0.2s'
-            }}
-          >
-            {autoSelected ? (
-              <>
-                <CheckCircle size={16} />
-                Selected!
-              </>
-            ) : (
-              <>
-                Select All
-              </>
-            )}
-          </button>
-
-          <button
-            onClick={handleOpenNaturalReaderApp}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              padding: `${theme.spacing.sm} ${theme.spacing.md}`,
-              background: theme.colors.darkNavy,
-              color: theme.colors.white,
-              border: 'none',
-              borderRadius: theme.borderRadius.sm,
-              fontSize: theme.fonts.sizes.sm,
-              fontWeight: '600',
-              cursor: 'pointer',
-              fontFamily: theme.fonts.body,
-              transition: 'all 0.2s'
-            }}
-          >
-            <ExternalLink size={16} />
-            Open Natural Reader
-          </button>
-        </div>
+       
       </div>
 
       {/* Content Mode Toggle */}
@@ -311,15 +202,10 @@ const LessonView = ({ module }) => {
         }}
         dangerouslySetInnerHTML={{
           __html: currentContent
-            // Convert **bold** to <strong>
             .replace(/\*\*([^*]+)\*\*/g, '<strong style="color: ' + theme.colors.navy + '; font-weight: 700;">$1</strong>')
-            // Convert *italic* to <em> (but not ** which is already handled)
             .replace(/(?<!\*)\*([^*]+)\*(?!\*)/g, '<em style="font-style: italic; color: ' + theme.colors.darkNavy + ';">$1</em>')
-            // Convert bullet points with • to styled list items
             .replace(/^• (.+)$/gm, '<div style="margin-left: 1.5rem; margin-bottom: 0.5rem;">• $1</div>')
-            // Add spacing after section headers (lines ending with :)
             .replace(/^(.+:)$/gm, '<div style="font-weight: 600; color: ' + theme.colors.navy + '; margin-top: 1rem; margin-bottom: 0.5rem; font-size: 1.1rem;">$1</div>')
-            // Convert newlines to proper breaks
             .replace(/\n\n/g, '<div style="height: 1rem;"></div>')
             .replace(/\n/g, '<br/>')
         }}

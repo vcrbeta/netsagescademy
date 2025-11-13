@@ -15,6 +15,7 @@ import modules from './data/modules';
 import { studyPlan, getWeekByDay } from './data/studyPlan';
 import theme from './styles/theme';
 
+
 // Protected Route Component
 const ProtectedRoute = ({ user, children }) => {
   if (!user) {
@@ -48,6 +49,29 @@ const Dashboard = ({ user }) => {
 
     loadProgress();
   }, [user]);
+
+// NaturalReader re-initialization
+useEffect(() => {
+  const reinitReader = () => {
+    const widget =
+      window.NRWidget ||
+      window.NaturalReaderWidget ||
+      window.nrWidget;
+    if (widget && widget.init) {
+      widget.init();
+      console.log("✅ NaturalReader initialized after route change");
+    }
+  };
+
+  // Try to initialize on mount
+  reinitReader();
+
+  // Re-init whenever the DOM updates (like switching modules)
+  const observer = new MutationObserver(() => reinitReader());
+  observer.observe(document.body, { childList: true, subtree: true });
+
+  return () => observer.disconnect();
+}, []);
 
   const handleModuleSelect = (day) => {
     setSelectedDay(day);
